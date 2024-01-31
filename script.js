@@ -16,5 +16,36 @@ const localStorageTransactions = JSON.parse(
 
   // Add Transaction 
 
+  function addTransaction(e) {
+    e.preventDefault();
+
+    if(text.value.trim() === '' || amount.value.trim() === '') {
+      alert('Please add a text and amount');
+    } else {
+      const transaction = {
+        id: generateID(),
+        text: text.value,
+        amount: +amount.value
+      };
+
+      transactions.push(transaction);
+
+      addTransactionDOM(transaction);
+      
+      updateValues();
+
+      updateLocalStorage();
+
+      text.value = '';
+      amount.value = '';
+    }
+  }
+
+  // Generate Random ID
+
+  function generateID() {
+    return Math.floor(Math.random() * 100000000);
+  }
+
   
   
